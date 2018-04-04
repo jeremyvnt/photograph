@@ -1,0 +1,20 @@
+image: registry.gitlab.com/cyril.prevot/photograph
+
+stages:
+- build
+
+cache:
+  key: ${CI_PROJECT_ID}
+  paths:
+  - android/.gradle/  
+
+build:
+  stage: build
+  script:
+  - yarn  
+  - npm install
+  - node node_modules/react-native/local-cli/cli.js eject  
+  - cd android && ./gradlew assembleDebug
+  artifacts:
+    paths:
+    - android/app/build/outputs/apk/

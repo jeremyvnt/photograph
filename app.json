@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Photograph",
+    "version": "1.0.0",
+    "slug": "photograph",
+    "sdkVersion": "25.0.0",
+    "ios": {
+      "bundleIdentifier": "com.ynov.photograph"
+    },
+    "android": {
+      "package": "com.ynov.photograph"
+    }
+  },
+  "name": "Photograph",
+  "displayName": "Photograph"
+}
