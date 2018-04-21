@@ -69,7 +69,6 @@ export default class Search extends React.Component {
                 platform= { Platform.OS }
                 cancelButtonTitle="Cancel"
                 onEndEditing={  (text) => this.fetchMethods(text.nativeEvent.text) }
-                clearIcon = {{ type:'font-awesome', name:'crosshairs'}}
                 placeholder='Search photos'
             />
         </View>
