@@ -3,7 +3,9 @@ import PhotoList from "../components/photo-list";
 import { likePhoto, unlikePhoto, downloadPhoto, getPhotoDetail, hideModal } from "../actions/photoAction";
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		//List avec photo update with like
+	}
 }
 
 export default connect(mapStateToProps, {

@@ -15,14 +15,14 @@ const makeList = (Item) => class List extends React.Component {
   render() {
     const {
       items,
+      navigation,
       ...props
     } = this.props;
-
     return (
       <FlatList
         data={items}
         keyExtractor={ item => item.id }
-        renderItem={({item}) => <Item {...item} {...props}/>}
+        renderItem={({item}) => <Item {...item} {...props} navigation={navigation} />}
         ItemSeparatorComponent={this.renderSeparator}
         onEndReached={ props.onEndReached }
         onEndReachedThreshold={ 0.9 }

@@ -24,6 +24,7 @@ const likePhoto = id => {
         photo
       });
     } catch (error) {
+      console.log(error)
       dispatch({
         type: LIKE_PHOTO_FAILED,
         error
@@ -53,7 +54,9 @@ const downloadPhoto = photo => {
   return async dispatch => {
     try {
       const test = await unsplash.photos.downloadPhoto(photo);
-      CameraRoll.saveToCameraRoll(photo.links.download).then(Alert.alert('Success', 'Photo added to camera roll!')).catch(err => console.log('err:', err))
+      CameraRoll.saveToCameraRoll(photo.links.download)
+      .then(Alert.alert('Success', 'Photo added to camera roll'))
+      .catch(Alert.alert('Echec', 'Download failed, please try later'))
       dispatch({
         type: LIKE_PHOTO_SUCCESS,
       });

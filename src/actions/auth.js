@@ -1,4 +1,5 @@
 import { toJson } from "unsplash-js/native"
+import { AsyncStorage } from 'react-native'
 
 import {
   INPUT_CHANGE,
@@ -20,17 +21,29 @@ export const handleLogin = (e) => {
 		const json = await unsplash.auth.userAuthentication(e.url.match('[^/]+(?=/$|$)')[0]).then(toJson)
 		unsplash.auth.setBearerToken(json.access_token)
 		const user = await unsplash.currentUser.profile().then(toJson)
+		await AsyncStorage.setItem('authenticatedUser', JSON.stringify(user));
 
 		dispatch({
         	type: LOGIN,
-        	payload: { user: user },
+        	payload: { user },
       	})
 	}
 }
 export const logout = () => {
-	fetch('https://unsplash.com/logout')
-	return {
-		type: LOGOUT,
-		payload: { user: null }
-	}
+	return async dispatch => {
+		try {
+			await fetch('https://unsplash.com/logout')
+			await AsyncStorage.removeItem('authenticatedUser');
+			dispatch({
+				type: LOGOUT,
+				payload: { user: null }
+			});
+		} catch(error) {
+			dispatch ({
+				type: LOGOUT,
+				payload: { user, error },
+			});
+		}
+	}	
+	
 }

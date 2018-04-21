@@ -49,8 +49,8 @@ export default class Home extends React.Component {
 
   render() {
     const items = this.props.photos
-    console.log('photos', items)
     const { selectedIndex } = this.state
+    console.log('Navigation HOME: ', this.props.navigation)
     return (
       <View style={{ flex: 1, flexDirection:'column', padding:0 }}>
         <ButtonGroup
@@ -60,7 +60,15 @@ export default class Home extends React.Component {
           buttons={['Trending','New','Old']}
           containerStyle={{height: 50}}
         />
-        { items && <PhotoList items={this.props.photos} dimension={ this.props.dimension } /> }
+        { 
+          items
+          &&
+          <PhotoList
+            items={this.props.photos}
+            dimension={this.props.dimension}
+            navigation={this.props.navigation}
+          />
+        }
       </View>
     );
   }

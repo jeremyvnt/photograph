@@ -56,7 +56,7 @@ const MainNavigator = StackNavigator(
 		},
 		Profile: {
 		    screen: Profile
-		}
+		},
 	},
 	{
 	    initialRouteName: 'Tab',

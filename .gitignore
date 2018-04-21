@@ -9,6 +9,9 @@
 # dependencies
 /node_modules
 
+#expo account
+/jeremy.vnt@gmail.com
+
 # misc
 .env.local
 .env.development.local

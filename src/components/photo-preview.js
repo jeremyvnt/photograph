@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View, Text, ImageBackground, StyleSheet } from "react-native";
+import { View, Text, ImageBackground, StyleSheet, AsyncStorage } from "react-native";
 import { Button,Avatar, Icon } from 'react-native-elements'
 import Modal from "react-native-modal";
 
@@ -43,11 +43,13 @@ export default class PhotoPreview extends Component {
 		}
   	}
 
-	likePhoto = (id, liked_by_user) => {
-	 	if(liked_by_user)
-	 		this.props.unlikePhoto(id)
-	 	else
-	 		this.props.likePhoto(id)
+	likePhoto = async (id, liked_by_user) => {
+		if (await AsyncStorage.getItem('authenticatedUser')){
+			liked_by_user ? this.props.unlikePhoto(id) : this.props.likePhoto(id);			
+		} else {
+			this.props.navigation.navigate('AuthModal')
+		}
+	 	
  	}
  	getPhotoDetail = (id) => {
  		this.props.getPhotoDetail(id)
@@ -61,7 +63,6 @@ export default class PhotoPreview extends Component {
 	 	const { user, urls, liked_by_user, id } = this.props
 	 	const like = liked_by_user ? 'heart' : 'heart-o'
 	 	const exif = this.props.exif ? this.props.exif : false
-
 	 	return (
 			<ImageBackground source={{
 				uri:urls.regular,
@@ -152,7 +153,7 @@ export default class PhotoPreview extends Component {
 								type: 'font-awesome'
 							}}
 						/>
-						<Button
+						{/*<Button
 							style={{ right:-150}}
 							transparent
 							icon={{
@@ -161,7 +162,7 @@ export default class PhotoPreview extends Component {
 								size:20, 
 								type: 'font-awesome'
 							}}
-						/>
+						/>*/}
 				 	</View>
 				 	<View style={{ flex: 1, flexDirection:'row',alignItems: 'flex-end', justifyContent: 'space-between' }}>
 					 	<View style={{ flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
