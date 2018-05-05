@@ -1,4 +1,4 @@
-#Photograph
+# Photograph
 Photograph is a React Native project based on Unsplash API (https://unsplash.com/documentation) 
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
